@@ -6,20 +6,21 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-let records = [{ nickname: "lulz", taps: 1337, timestamp: "13/02 1:37:42"}];
+let records = [];
 
 app.get('/', (request, response) => {
+    console.log("Records requested");
     response.send(JSON.stringify(records));
 });
 
 app.post('/addRecord', (request, response) => {
-    console.log("Received an entry:\n" + request.body);
+    console.log("Received an entry: " + JSON.stringify(request.body));
 
     let score = Number(request.body.taps);
     let record = {
         nickname: request.body.nickname,
         taps: Number(request.body.taps),
-        timestamp: request.body.timestamp
+        timestamp: request.body.timestamp,
     };
     if (records.length < RECORD_LIST_LENGTH) {
         records.push(record);
@@ -28,7 +29,7 @@ app.post('/addRecord', (request, response) => {
             return element === array[RECORD_LIST_LENGTH - 1];
         })] = record;
     }
-    records.sort((a, b) => { return a.taps - b.taps });
+    records.sort((a, b) => { return b.taps - a.taps });
 
     response.send("Received");
 });
