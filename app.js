@@ -3,7 +3,7 @@ const DOMAIN = "http://localhost";
 const RECORD_LIST_LENGTH = 10;
 
 let port = DEFAULT_PORT;
-if (process.argv.length >= 2)
+if (process.argv.length >= 3)
     port = process.argv[2];
 let url = DOMAIN + ":" + port;
 
