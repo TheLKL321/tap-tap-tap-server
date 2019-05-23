@@ -2,11 +2,18 @@ const DEFAULT_PORT = 7100;
 const DOMAIN = "http://localhost";
 const RECORD_LIST_LENGTH = 10;
 
-let port = DEFAULT_PORT;
-if (process.argv.length >= 3)
-    port = process.argv[2];
-let url = DOMAIN + ":" + port;
+if (process.argv[2] === "help") {
+    console.log("Usage: node app.js <domain> <port>");
+    process.exit(0);
+}
 
+let port = DEFAULT_PORT;
+let domain = DOMAIN;
+if (process.argv.length >= 3)
+    domain = process.argv[2];
+if (process.argv.length >= 4)
+    port = process.argv[3];
+let url = DOMAIN + ":" + port;
 
 const express = require('express');
 const app = express();
