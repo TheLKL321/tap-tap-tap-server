@@ -1,10 +1,12 @@
 const DEFAULT_PORT = 7100;
-const DOMAIN = "http://localhost:" + port;
+const DOMAIN = "http://localhost";
 const RECORD_LIST_LENGTH = 10;
 
-let port = DEFAULT_PORT
+let port = DEFAULT_PORT;
 if (process.argv.length >= 2)
     port = process.argv[2];
+let url = DOMAIN + ":" + port;
+
 
 const express = require('express');
 const app = express();
@@ -39,5 +41,5 @@ app.post('/addRecord', (request, response) => {
 });
 
 app.listen(port, () => {
-    console.log('Server listening on ' + URL);
+    console.log('Server listening on ' + url);
 });
