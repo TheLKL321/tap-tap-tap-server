@@ -2,7 +2,7 @@ const DEFAULT_PORT = 7100;
 const RECORD_LIST_LENGTH = 10;
 
 if (process.argv[2] === "help") {
-    console.log("Usage: node app.js <domain> <port>");
+    console.log("Usage: node app.js <port>");
     process.exit(0);
 }
 
@@ -16,19 +16,19 @@ app.use(express.json());
 
 let records = [];
 
-app.get('/', (request, response) => {
+app.get('/', (req, res) => {
     console.log("Records requested");
-    response.send(JSON.stringify(records));
+    res.send(JSON.stringify(records));
 });
 
-app.post('/addRecord', (request, response) => {
-    console.log("Received an entry: " + JSON.stringify(request.body));
+app.post('/addRecord', (req, res) => {
+    console.log("Received an entry: \n" + req.body);
 
-    let score = Number(request.body.taps);
+    let score = Number(req.body.taps);
     let record = {
-        nickname: request.body.nickname,
-        taps: Number(request.body.taps),
-        timestamp: request.body.timestamp,
+        nickname: req.body.nickname,
+        taps: Number(req.body.taps),
+        timestamp: req.body.timestamp,
     };
     if (records.length < RECORD_LIST_LENGTH) {
         records.push(record);
@@ -39,7 +39,7 @@ app.post('/addRecord', (request, response) => {
     }
     records.sort((a, b) => { return b.taps - a.taps });
 
-    response.send("Received");
+    res.json({});
 });
 
 app.listen(port, () => {
