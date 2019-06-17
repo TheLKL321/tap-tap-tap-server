@@ -22,7 +22,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/addRecord', (req, res) => {
-    console.log("Received an entry: \n" + req.body);
+    console.log("Received an entry:");
+    console.log(req.body);
 
     let score = Number(req.body.taps);
     let record = {
