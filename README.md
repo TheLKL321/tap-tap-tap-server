@@ -4,5 +4,5 @@ A tiny server for TapTapTap written in Express.js meant to be used by [TapTapTap
 # Installation and running
 ```
 npm install
-node app.js
+node app.js <port>
 ```
